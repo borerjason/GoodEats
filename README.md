@@ -1,0 +1,2 @@
+In the same terminal window, type 'npm run react-dev'. This will start webpack for transpilation of your jsx files
+6. In a new terminal window, type 'npm run start'. This will start express web server for your site
