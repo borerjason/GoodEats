@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import PropTypes from 'prop-types';
 
 import { fetchRecipes } from '../actions';
 
@@ -11,7 +12,6 @@ class SearchBar extends Component {
   }
 
   renderField(field) {
-    console.log('RenderField');
     return (
       <div>
         <input
@@ -52,6 +52,11 @@ function validate(values) {
   }
   return errors;
 }
+
+SearchBar.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  fetchRecipes: PropTypes.func.isRequired,
+};
 
 export default reduxForm({
   validate,
