@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { fetchRecipes } from '../actions';
-
 
 class SearchBar extends Component {
   onSubmit(term) {
@@ -24,6 +24,7 @@ class SearchBar extends Component {
   }
 
   render() {
+    console.log('history', this.props.history)
     const { handleSubmit } = this.props;
     return (
       <div>
@@ -32,7 +33,9 @@ class SearchBar extends Component {
             name="search"
             component={this.renderField}
           />
-          <button type="submit" className="btn btn-primary">Search</button>
+          <button
+             type="submit" className="btn btn-primary">Search
+          </button>
         </form>
       </div>
     );

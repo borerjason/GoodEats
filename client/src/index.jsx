@@ -8,6 +8,7 @@ import promise from 'redux-promise';
 import reducers from './reducers';
 import RecipeList from './containers/recipe_list';
 import SearchBar from './containers/search_bar';
+import Recipe from './components/recipe';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -17,7 +18,8 @@ ReactDOM.render(
       <div>
         <SearchBar />
         <Switch>
-          <Route path="/" component={RecipeList} />
+          <Route path="/recipes/:label" component={Recipe} />
+          <Route exact path="/" component={RecipeList} />
         </Switch>
       </div>
     </BrowserRouter>

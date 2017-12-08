@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
 class RecipeList extends Component {
   populateRecipes() {
     console.log('RECIPES IN RECIPE LIST-------', this.props.recipes);
     return (
       <div>
-        {this.props.recipes.map(recipe => (
+        {_.map(this.props.recipes, recipe => (
           <div>
             <h3>{recipe.label}</h3>
             <div className="thumbnail">
               <img src={recipe.image} />
             </div>
+            <Link className="btn btn-primary" to={`/recipes/${recipe.label}`}>Explore Recipe</Link>
           </div>
         ))}
       </div>
     );
   }
   render() {
-    if (Array.isArray(this.props.recipes)) {
+    if (!_.isEmpty(this.props.recipes)) {
       return (
         <div>
         {this.populateRecipes()}
