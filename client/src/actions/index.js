@@ -1,15 +1,13 @@
 import axios from 'axios';
-import dummy from '../../../dummy_data';
+// import dummy from '../../../dummy_data';
 
 export const FETCH_RECIPES = 'fetch_recipes';
 
 export function fetchRecipes(term) {
-  // const request = axios.get('https://api.edamam.com/search', {
-  //   params: { term },
-  // });
-  console.log('HITTING IN ACTION CREATOR', dummy);
+  const request = axios.post('/recipes', { term });
+  console.log('HITTING IN ACTION CREATOR');
   return {
     type: FETCH_RECIPES,
-    payload: dummy,
+    payload: request,
   };
 }

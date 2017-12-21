@@ -8,13 +8,15 @@ class RecipeList extends Component {
     console.log('RECIPES IN RECIPE LIST-------', this.props.recipes);
     return (
       <div>
-        {_.map(this.props.recipes, recipe => (
+        {_.map(this.props.recipes, item => (
           <div>
-            <h3>{recipe.label}</h3>
-            <div className="thumbnail">
-              <img src={recipe.image} />
-            </div>
-            <Link className="btn btn-primary" to={`/recipes/${recipe.label}`}>Explore Recipe</Link>
+            <Link to={`/recipes/${item.label}`}>
+              <h3>{item.label}</h3>
+              <div className="thumbnail">
+                <img src={item.image} />
+              </div>
+            </Link>
+            {/* <Link className="btn btn-primary" to={`/recipes/${recipe.label}`}>Explore Recipe</Link> */}
           </div>
         ))}
       </div>
@@ -23,7 +25,7 @@ class RecipeList extends Component {
   render() {
     if (!_.isEmpty(this.props.recipes)) {
       return (
-        <div>
+        <div className="recipe-container">
         {this.populateRecipes()}
       </div>
     );

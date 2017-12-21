@@ -24,7 +24,6 @@ class SearchBar extends Component {
   }
 
   render() {
-    console.log('history', this.props.history)
     const { handleSubmit } = this.props;
     return (
       <div>
