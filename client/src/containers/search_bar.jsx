@@ -1,39 +1,40 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { fetchRecipes } from '../actions';
 
 class SearchBar extends Component {
-  onSubmit(term) {
-    this.props.fetchRecipes(term.search);
+  constructor(props) {
+    super(props);
+    this.state = {
+      term: '',
+    };
   }
-
-  renderField(field) {
-    return (
-      <div>
-        <input
-          className="form-control"
-          type="text"
-          {...field.input}
-        />
-      </div>
-    );
-  }
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.fetchRecipes(this.state.term);
+    this.props.history.push('/');
+     {/* <Redirect to="/" />; */}
+    }
+    
+    onClick() {
+    }
 
   render() {
-    const { handleSubmit } = this.props;
     return (
       <div>
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <Field
-            name="search"
-            component={this.renderField}
+        <form onSubmit={(this.onSubmit.bind(this))}>
+          <input
+            className="form-control"
+            type="text"
+            value={this.state.term}
+            placeholder="Search for a recipe..."
+            onChange={e => this.setState({ term: e.target.value })}
           />
           <button
-             type="submit" className="btn btn-primary">Search
+            type="submit" className="btn btn-primary">Search 
           </button>
         </form>
       </div>
@@ -41,26 +42,9 @@ class SearchBar extends Component {
   }
 }
 
-function validate(values) {
-  // console.log(values) --> { title: , categories: , content:  }
-  const errors = {};
-  // validate the inputs from 'values'
-  // check to see if there are numbers in the form
-  if (!values.search) {
-    errors.search = 'Enter a title!';
-
-  // if errors is empty, the form is fine to submit
-  // if erros has any properies redux form assumes form in invalid
-  }
-  return errors;
-}
 
 SearchBar.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
   fetchRecipes: PropTypes.func.isRequired,
 };
 
-export default reduxForm({
-  validate,
-  form: 'SearchForRecipes',
-})(connect(null, { fetchRecipes })(SearchBar));
+export default withRouter(connect(null, { fetchRecipes })(SearchBar));

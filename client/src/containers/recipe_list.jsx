@@ -7,14 +7,14 @@ class RecipeList extends Component {
   populateRecipes() {
     console.log('RECIPES IN RECIPE LIST-------', this.props.recipes);
     return (
-      <div>
+      <div className="recipe-container">
         {_.map(this.props.recipes, item => (
-          <div>
+          <div className="recipe-item">
             <Link to={`/recipes/${item.label}`}>
-              <h3>{item.label}</h3>
               <div className="thumbnail">
-                <img src={item.image} />
+                <img className="recipe-img" src={item.image} />
               </div>
+              <p className="recipe-label">{item.label}</p>
             </Link>
             {/* <Link className="btn btn-primary" to={`/recipes/${recipe.label}`}>Explore Recipe</Link> */}
           </div>
@@ -28,11 +28,17 @@ class RecipeList extends Component {
         <div className="recipe-container">
         {this.populateRecipes()}
       </div>
-    );
+      );
     }
     return (
-      <div> Search For Recipes Above!</div>
-    )
+      <div className="test-container">
+        {_.map([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], num => (
+          <div className="test-item">
+            <div>{num}</div>
+          </div>
+        ))}
+      </div>
+    );
   }
 }
 
